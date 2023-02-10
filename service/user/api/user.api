@@ -1,0 +1,61 @@
+type (
+	// 用户登录
+	douyin_user_login_request {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+
+	douyin_user_login_response {
+		User_id int    `json:"user_id"`
+		Token   string `json:"token"`
+	}
+	// 用户登录
+
+	// 用户注册
+	douyin_user_register_request {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	douyin_user_register_response {
+		User_id int    `json:"user_id"`
+		Token   string `json:"token"`
+	}
+	// 用户注册
+
+	// 用户信息
+	douyin_user_request {
+		User_id string `json:"user_id"`
+		Token   string `json:"token"`
+	}
+
+	douyin_user_info {
+		Id             int    `json:"id"`
+		Name           string `json:"name"`
+		Follow_count   int    `json:"follow_count"`
+		Follower_count int    `json:"follower_count"`
+		Is_follow      bool   `json:"is_follow"`
+	}
+
+	douyin_user_response {
+		Status_code int              `json:"status_code"`
+		Status_msg  string           `json:"status_msg"`
+		User        douyin_user_info `json:"user"`
+	}
+	// 用户信息
+)
+
+service User {
+	@handler Login
+	post /douyin/user/login (douyin_user_login_request) returns (douyin_user_login_response)
+	
+	@handler Register
+	post /douyin/user/register (douyin_user_register_request) returns (douyin_user_register_response)
+}
+
+@server(
+	jwt: Auth
+)
+service User {
+	@handler UserInfo
+	post /api/user returns (douyin_user_response)
+}
