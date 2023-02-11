@@ -28,7 +28,6 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 
 func (l *LoginLogic) Login(in *user.DouyinUserLoginRequest) (*user.DouyinUserLoginResponse, error) {
 	// todo: add your logic here and delete this line
-
 	//查询用户是否存在
 	res, err := l.svcCtx.LoginModel.FindOneByName(l.ctx, in.Username)
 	if err != nil {
@@ -46,4 +45,5 @@ func (l *LoginLogic) Login(in *user.DouyinUserLoginRequest) (*user.DouyinUserLog
 	return &user.DouyinUserLoginResponse{
 		UserId: res.UserId,
 	}, nil
+
 }

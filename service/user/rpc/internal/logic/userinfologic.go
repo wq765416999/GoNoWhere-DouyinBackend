@@ -43,9 +43,8 @@ func (l *UserInfoLogic) UserInfo(in *user.DouyinUserRequest) (*user.DouyinUserRe
 		}
 		return nil, status.Error(100, "查询用户失败")
 	}
-
 	return &user.DouyinUserResponse{
-		User: &user.User{
+		User: &user.DouyinUser{
 			Id:   res.UserId,
 			Name: res1.Name,
 		},

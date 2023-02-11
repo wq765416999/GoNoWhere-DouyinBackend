@@ -2,9 +2,11 @@ package logic
 
 import (
 	"context"
+	"encoding/json"
 
 	"mini-douyin/service/user/api/internal/svc"
 	"mini-douyin/service/user/api/internal/types"
+	"mini-douyin/service/user/rpc/userclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,6 +27,18 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 
 func (l *UserInfoLogic) UserInfo() (resp *types.Douyin_user_response, err error) {
 	// todo: add your logic here and delete this line
+	uid, _ := l.ctx.Value("uid").(json.Number).Int64()
+	res, err := l.svcCtx.UserRpc.UserInfo(l.ctx, &userclient.DouyinUserRequest{
+		UserId: int64(uid),
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.Douyin_user_response{
+		User: &types.Douyin_user_info{
+			Id:   int(res.User.Id),
+			Name: res.User.Name,
+		},
+	}, nil
 }

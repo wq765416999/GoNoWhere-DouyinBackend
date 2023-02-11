@@ -34,5 +34,7 @@ func (l *RegisterLogic) Register(req *types.Douyin_user_register_request) (resp 
 		return nil, err
 	}
 
-	return
+	return &types.Douyin_user_register_response{
+		User_id: int(res.UserId),
+	}, nil
 }

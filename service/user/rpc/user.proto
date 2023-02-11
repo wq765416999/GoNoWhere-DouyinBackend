@@ -41,10 +41,10 @@ message douyin_user_request {
 message douyin_user_response {
   int32 status_code = 1; // 状态码，0-成功，其他值-失败
   optional string status_msg = 2; // 返回状态描述
-  user user = 3; // 用户信息
+  douyin_user user = 3; // 用户信息
 }
 
-message user {
+message douyin_user {
   int64 id = 1; // 用户id
   string name = 2; // 用户名称
   optional int64 follow_count = 3; // 关注总数

@@ -37,5 +37,5 @@ type Douyin_user_info struct {
 type Douyin_user_response struct {
 	Status_code int              `json:"status_code"`
 	Status_msg  string           `json:"status_msg"`
-	User        douyin_user_info `json:"user"`
+	User        Douyin_user_info `json:"user"`
 }

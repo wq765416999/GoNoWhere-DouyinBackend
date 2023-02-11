@@ -13,13 +13,13 @@ import (
 )
 
 type (
+	DouyinUser                 = user.DouyinUser
 	DouyinUserLoginRequest     = user.DouyinUserLoginRequest
 	DouyinUserLoginResponse    = user.DouyinUserLoginResponse
 	DouyinUserRegisterRequest  = user.DouyinUserRegisterRequest
 	DouyinUserRegisterResponse = user.DouyinUserRegisterResponse
 	DouyinUserRequest          = user.DouyinUserRequest
 	DouyinUserResponse         = user.DouyinUserResponse
-	User                       = user.User
 
 	User interface {
 		Login(ctx context.Context, in *DouyinUserLoginRequest, opts ...grpc.CallOption) (*DouyinUserLoginResponse, error)
