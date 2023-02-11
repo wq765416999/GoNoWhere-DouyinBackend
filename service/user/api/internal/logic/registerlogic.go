@@ -5,6 +5,7 @@ import (
 
 	"mini-douyin/service/user/api/internal/svc"
 	"mini-douyin/service/user/api/internal/types"
+	"mini-douyin/service/user/rpc/userclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,6 +26,13 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 
 func (l *RegisterLogic) Register(req *types.Douyin_user_register_request) (resp *types.Douyin_user_register_response, err error) {
 	// todo: add your logic here and delete this line
+	res, err := l.svcCtx.UserRpc.Register(l.ctx, &userclient.DouyinUserRegisterRequest{
+		Username: req.Username,
+		Password: req.Password,
+	})
+	if err != nil {
+		return nil, err
+	}
 
 	return
 }
