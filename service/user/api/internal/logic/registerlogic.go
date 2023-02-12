@@ -2,7 +2,9 @@ package logic
 
 import (
 	"context"
+	"mini-douyin/common/jwtx"
 	"mini-douyin/service/user/rpc/userclient"
+	"time"
 
 	"mini-douyin/service/user/api/internal/svc"
 	"mini-douyin/service/user/api/internal/types"
@@ -35,7 +37,18 @@ func (l *RegisterLogic) Register(req *types.Douyin_user_register_request) (resp 
 		return nil, err
 	}
 
+	now := time.Now().Unix()
+	accessExpire := l.svcCtx.Config.Auth.AccessExpire
+
+	accessToken, err := jwtx.GetToken(l.svcCtx.Config.Auth.AccessSecret, now, accessExpire, res.UserId)
+	if err != nil {
+		return nil, err
+	}
+
 	return &types.Douyin_user_register_response{
-		UserID: int(res.UserId),
+		StatusCode: int(0),
+		StatusMsg:  "success",
+		UserID:     int(res.UserId),
+		Token:      accessToken,
 	}, nil
 }

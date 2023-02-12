@@ -28,7 +28,7 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 func (l *UserInfoLogic) UserInfo(in *user.DouyinUserRequest) (*user.DouyinUserResponse, error) {
 	// todo: add your logic here and delete this line
 	//查询用户是否存在
-	res, err := l.svcCtx.UserModel.FindOne(l.ctx, in.UserId)
+	res, err := l.svcCtx.LoginModel.FindOne(l.ctx, in.UserId)
 	if err != nil {
 		if err == model.ErrNotFound {
 			return nil, status.Error(100, "用户不存在")

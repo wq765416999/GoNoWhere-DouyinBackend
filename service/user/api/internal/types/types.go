@@ -2,8 +2,8 @@
 package types
 
 type Douyin_user_login_request struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `form:"username"`
+	Password string `form:"password"`
 }
 
 type Douyin_user_login_response struct {
@@ -14,8 +14,8 @@ type Douyin_user_login_response struct {
 }
 
 type Douyin_user_register_request struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username string `form:"username"`
+	Password string `form:"password"`
 }
 
 type Douyin_user_register_response struct {
@@ -26,8 +26,8 @@ type Douyin_user_register_response struct {
 }
 
 type Douyin_user_request struct {
-	UserID int    `json:"user_id"`
-	Token  string `json:"token"`
+	UserID int    `form:"user_id"`
+	Token  string `form:"token"`
 }
 
 type Douyin_user_response struct {

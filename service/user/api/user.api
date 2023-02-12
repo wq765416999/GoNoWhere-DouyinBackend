@@ -1,8 +1,8 @@
 type (
 	// 用户登录
 	Douyin_user_login_request {
-		Username string `json:"username"`
-		Password string `json:"password"`
+		Username string `form:"username"`
+		Password string `form:"password"`
 	}
 
 	Douyin_user_login_response {
@@ -15,8 +15,8 @@ type (
 
 	// 用户注册
 	Douyin_user_register_request {
-		Username string `json:"username"`
-		Password string `json:"password"`
+		Username string `form:"username"`
+		Password string `form:"password"`
 	}
 	Douyin_user_register_response {
 		StatusCode int    `json:"status_code"`
@@ -28,8 +28,8 @@ type (
 
 	// 用户信息
 	Douyin_user_request {
-		UserID int    `json:"user_id"`
-		Token  string `json:"token"`
+		UserID int    `form:"user_id"`
+		Token  string `form:"token"`
 	}
 
 	Douyin_user_response {
@@ -56,10 +56,7 @@ service User {
 	post /douyin/user/register (Douyin_user_register_request) returns (Douyin_user_register_response)
 }
 
-@server(
-	jwt: Auth
-)
 service User {
 	@handler UserInfo
-	post /api/user returns (Douyin_user_response)
+	get /douyin/user (Douyin_user_request)returns (Douyin_user_response)
 }

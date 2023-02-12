@@ -2,12 +2,10 @@ package logic
 
 import (
 	"context"
-	"mini-douyin/common/jwtx"
-	"mini-douyin/service/user/rpc/userclient"
-	"time"
-
 	"mini-douyin/service/user/api/internal/svc"
 	"mini-douyin/service/user/api/internal/types"
+	"mini-douyin/service/user/rpc/userclient"
+	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -28,7 +26,6 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 
 func (l *LoginLogic) Login(req *types.Douyin_user_login_request) (resp *types.Douyin_user_login_response, err error) {
 	// todo: add your logic here and delete this line
-	// todo: add your logic here and delete this line
 
 	//return &types.Douyin_user_login_response{
 	//	User_id: int(1),
@@ -41,18 +38,22 @@ func (l *LoginLogic) Login(req *types.Douyin_user_login_request) (resp *types.Do
 	if err != nil {
 		return nil, err
 	}
-
-	now := time.Now().Unix()
-	accessExpire := l.svcCtx.Config.Auth.AccessExpire
-
-	accessToken, err := jwtx.GetToken(l.svcCtx.Config.Auth.AccessSecret, now, accessExpire, res.UserId)
+	//
+	//now := time.Now().Unix()
+	//accessExpire := l.svcCtx.Config.Auth.AccessExpire
+	//
+	//accessToken, err := jwtx.GetToken(l.svcCtx.Config.Auth.AccessSecret, now, accessExpire, res.UserId)
+	//println(res.UserId)
+	//println(accessToken)
 	if err != nil {
 		return nil, err
 	}
-
+	//println("token@:" + accessToken)
 	return &types.Douyin_user_login_response{
-		UserID: int(res.UserId),
-		Token:  accessToken,
+		StatusCode: int(0),
+		StatusMsg:  "success",
+		UserID:     int(res.UserId),
+		Token:      strconv.FormatInt(res.UserId, 10),
 	}, nil
 	return
 }

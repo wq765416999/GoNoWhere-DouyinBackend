@@ -2,11 +2,11 @@ package logic
 
 import (
 	"context"
-	"encoding/json"
-	"mini-douyin/service/user/rpc/userclient"
-
+	"mini-douyin/common/jwtx"
 	"mini-douyin/service/user/api/internal/svc"
 	"mini-douyin/service/user/api/internal/types"
+	"mini-douyin/service/user/rpc/userclient"
+	"strconv"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,17 +25,25 @@ func NewUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserInfo
 	}
 }
 
-func (l *UserInfoLogic) UserInfo() (resp *types.Douyin_user_response, err error) {
+func (l *UserInfoLogic) UserInfo(req *types.Douyin_user_request) (resp *types.Douyin_user_response, err error) {
 	// todo: add your logic here and delete this line
-	uid, _ := l.ctx.Value("uid").(json.Number).Int64()
+
+	token, err := strconv.ParseInt(req.Token, 10, 64)
+	res1, err := jwtx.ParseToken2Uid(l.svcCtx.Config.Auth.AccessSecret, uint64(token))
+
+	if err != nil {
+		return nil, err
+	}
 	res, err := l.svcCtx.UserRpc.UserInfo(l.ctx, &userclient.DouyinUserRequest{
-		UserId: int64(uid),
+		UserId: int64(res1),
 	})
 	if err != nil {
 		return nil, err
 	}
-
 	return &types.Douyin_user_response{
-		User: types.Douyin_user_info{ID: int(res.User.Id), Name: res.User.Name},
+		StatusCode: int(0),
+		StatusMsg:  "success",
+		User: types.Douyin_user_info{ID: int(res.User.Id), Name: res.User.Name, FollowCount: 0,
+			FollowerCount: 0, IsFollow: false},
 	}, nil
 }
