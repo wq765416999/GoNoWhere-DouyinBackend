@@ -3,10 +3,10 @@ package logic
 import (
 	"context"
 	"encoding/json"
+	"mini-douyin/service/user/rpc/userclient"
 
 	"mini-douyin/service/user/api/internal/svc"
 	"mini-douyin/service/user/api/internal/types"
-	"mini-douyin/service/user/rpc/userclient"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -36,6 +36,6 @@ func (l *UserInfoLogic) UserInfo() (resp *types.Douyin_user_response, err error)
 	}
 
 	return &types.Douyin_user_response{
-		User: types.Douyin_user_info{Id: int(res.User.Id), Name: res.User.Name},
+		User: types.Douyin_user_info{ID: int(res.User.Id), Name: res.User.Name},
 	}, nil
 }

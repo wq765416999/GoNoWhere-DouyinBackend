@@ -7,8 +7,10 @@ type Douyin_user_login_request struct {
 }
 
 type Douyin_user_login_response struct {
-	User_id int    `json:"user_id"`
-	Token   string `json:"token"`
+	StatusCode int    `json:"status_code"`
+	StatusMsg  string `json:"status_msg"`
+	UserID     int    `json:"user_id"`
+	Token      string `json:"token"`
 }
 
 type Douyin_user_register_request struct {
@@ -17,25 +19,27 @@ type Douyin_user_register_request struct {
 }
 
 type Douyin_user_register_response struct {
-	User_id int    `json:"user_id"`
-	Token   string `json:"token"`
+	StatusCode int    `json:"status_code"`
+	StatusMsg  string `json:"status_msg"`
+	UserID     int    `json:"user_id"`
+	Token      string `json:"token"`
 }
 
 type Douyin_user_request struct {
-	User_id string `json:"user_id"`
-	Token   string `json:"token"`
+	UserID int    `json:"user_id"`
+	Token  string `json:"token"`
 }
 
 type Douyin_user_response struct {
-	Status_code int              `json:"status_code"`
-	Status_msg  string           `json:"status_msg"`
-	User        Douyin_user_info `json:"user"`
+	StatusCode int              `json:"status_code"`
+	StatusMsg  string           `json:"status_msg"`
+	User       Douyin_user_info `json:"user"`
 }
 
 type Douyin_user_info struct {
-	Id             int    `json:"id"`
-	Name           string `json:"name"`
-	Follow_count   int    `json:"follow_count"`
-	Follower_count int    `json:"follower_count"`
-	Is_follow      bool   `json:"is_follow"`
+	ID            int    `json:"id"`
+	Name          string `json:"name"`
+	FollowCount   int    `json:"follow_count"`
+	FollowerCount int    `json:"follower_count"`
+	IsFollow      bool   `json:"is_follow"`
 }

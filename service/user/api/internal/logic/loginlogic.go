@@ -2,12 +2,14 @@ package logic
 
 import (
 	"context"
-	"github.com/zeromicro/go-zero/core/logx"
 	"mini-douyin/common/jwtx"
-	"mini-douyin/service/user/api/internal/svc"
-	"mini-douyin/service/user/api/internal/types"
 	"mini-douyin/service/user/rpc/userclient"
 	"time"
+
+	"mini-douyin/service/user/api/internal/svc"
+	"mini-douyin/service/user/api/internal/types"
+
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 type LoginLogic struct {
@@ -26,6 +28,8 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 
 func (l *LoginLogic) Login(req *types.Douyin_user_login_request) (resp *types.Douyin_user_login_response, err error) {
 	// todo: add your logic here and delete this line
+	// todo: add your logic here and delete this line
+
 	//return &types.Douyin_user_login_response{
 	//	User_id: int(1),
 	//	Token:   req.Username,
@@ -47,8 +51,8 @@ func (l *LoginLogic) Login(req *types.Douyin_user_login_request) (resp *types.Do
 	}
 
 	return &types.Douyin_user_login_response{
-
-		User_id: int(res.UserId),
-		Token:   accessToken,
+		UserID: int(res.UserId),
+		Token:  accessToken,
 	}, nil
+	return
 }
