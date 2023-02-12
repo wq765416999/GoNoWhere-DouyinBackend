@@ -43,7 +43,7 @@ func (l *LoginLogic) Login(in *user.DouyinUserLoginRequest) (*user.DouyinUserLog
 		return nil, status.Error(100, "密码错误")
 	}
 	return &user.DouyinUserLoginResponse{
-		UserId: res.UserId,
+		UserId: res.Id,
 	}, nil
 
 }

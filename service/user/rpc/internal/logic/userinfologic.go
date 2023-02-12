@@ -45,7 +45,7 @@ func (l *UserInfoLogic) UserInfo(in *user.DouyinUserRequest) (*user.DouyinUserRe
 	}
 	return &user.DouyinUserResponse{
 		User: &user.DouyinUser{
-			Id:   res.UserId,
+			Id:   res.Id,
 			Name: res1.Name,
 		},
 	}, nil

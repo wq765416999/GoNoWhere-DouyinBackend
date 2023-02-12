@@ -26,16 +26,16 @@ type Douyin_user_request struct {
 	Token   string `json:"token"`
 }
 
+type Douyin_user_response struct {
+	Status_code int              `json:"status_code"`
+	Status_msg  string           `json:"status_msg"`
+	User        Douyin_user_info `json:"user"`
+}
+
 type Douyin_user_info struct {
 	Id             int    `json:"id"`
 	Name           string `json:"name"`
 	Follow_count   int    `json:"follow_count"`
 	Follower_count int    `json:"follower_count"`
 	Is_follow      bool   `json:"is_follow"`
-}
-
-type Douyin_user_response struct {
-	Status_code int              `json:"status_code"`
-	Status_msg  string           `json:"status_msg"`
-	User        Douyin_user_info `json:"user"`
 }

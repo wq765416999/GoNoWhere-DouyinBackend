@@ -28,24 +28,29 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 
 func (l *RegisterLogic) Register(in *user.DouyinUserRegisterRequest) (*user.DouyinUserRegisterResponse, error) {
 	// todo: add your logic here and delete this line
+
 	_, err := l.svcCtx.LoginModel.FindOneByName(l.ctx, in.Username)
+
 	if err == nil {
 		return nil, status.Error(100, "用户名已存在")
 	}
 
-	newUser := model.Logins{
-		Name:     in.Username,
-		PassWord: cryptx.PasswordEncrypt(l.svcCtx.Config.Salt, in.Password),
-	}
-
 	if err == model.ErrNotFound {
+		newUser := model.Logins{
+			Name:     in.Username,
+			PassWord: cryptx.PasswordEncrypt(l.svcCtx.Config.Salt, in.Password),
+		}
+
 		res, err := l.svcCtx.LoginModel.Insert(l.ctx, &newUser)
 		if err != nil {
 			return nil, status.Error(100, "注册失败")
 		}
 		newUser.Id, err = res.LastInsertId()
+		if err != nil {
+			return nil, status.Error(100, "error")
+		}
 		return &user.DouyinUserRegisterResponse{
-			UserId: newUser.UserId,
+			UserId: newUser.Id,
 		}, nil
 	}
 

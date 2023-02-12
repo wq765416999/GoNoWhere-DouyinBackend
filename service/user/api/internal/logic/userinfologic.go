@@ -36,9 +36,6 @@ func (l *UserInfoLogic) UserInfo() (resp *types.Douyin_user_response, err error)
 	}
 
 	return &types.Douyin_user_response{
-		User: &types.Douyin_user_info{
-			Id:   int(res.User.Id),
-			Name: res.User.Name,
-		},
+		User: types.Douyin_user_info{Id: int(res.User.Id), Name: res.User.Name},
 	}, nil
 }
